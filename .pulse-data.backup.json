@@ -1,0 +1,82 @@
+{
+  "users": [
+    {
+      "id": "user_1792410312257_9kbs",
+      "username": "pw_refactor_user",
+      "displayName": "Алексей Рефакторинг",
+      "avatarColor": "#5288C1",
+      "role": "В сети Pulse",
+      "online": false,
+      "lastSeen": "2026-10-19T11:46:09.346Z",
+      "passwordHash": "$2b$10$jTN6I.uNFDux6q15ArL6QeYOjjHMXobu3GwnQfBBnOmyYSpeHc8vS"
+    },
+    {
+      "id": "user_1792411398796_4ev4",
+      "username": "alex_dev",
+      "displayName": "Алексей Иванов",
+      "email": "alex@example.com",
+      "avatarColor": "#3E9F65",
+      "role": "В сети Pulse",
+      "online": false,
+      "lastSeen": "2026-10-19T12:06:07.167Z",
+      "passwordHash": "$2b$10$gRlu.rpmlqU04.T.mP/ZJednSFLTn81rd2gtp7nhXelqf8sIUmGza"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "group_1792411481862_ff3a",
+      "type": "group",
+      "title": "Команда Core",
+      "handle": "core_team",
+      "description": "",
+      "avatarColor": "#3E9F65",
+      "ownerId": "user_1792411398796_4ev4",
+      "adminIds": [
+        "user_1792411398796_4ev4"
+      ],
+      "memberIds": [
+        "user_1792411398796_4ev4"
+      ],
+      "isPublic": false,
+      "createdAt": "2026-10-19T12:04:41.862Z"
+    }
+  ],
+  "messages": {
+    "group_1792411481862_ff3a": [
+      {
+        "id": "msg_1792411499139_s5bq",
+        "conversationId": "group_1792411481862_ff3a",
+        "senderId": "user_1792411398796_4ev4",
+        "senderName": "Алексей Иванов",
+        "senderAvatarColor": "#3E9F65",
+        "recipientId": "group_1792411481862_ff3a",
+        "text": "Привет команде! Добро пожаловать в закрытую группу Pulse.",
+        "createdAt": "2026-10-19T12:04:59.143Z",
+        "status": "delivered",
+        "attachmentType": "text"
+      },
+      {
+        "id": "msg_1792411548502_ye4w",
+        "conversationId": "group_1792411481862_ff3a",
+        "senderId": "user_1792411398796_4ev4",
+        "senderName": "Алексей Иванов",
+        "senderAvatarColor": "#3E9F65",
+        "recipientId": "group_1792411481862_ff3a",
+        "text": "Всё работает стабильно!",
+        "createdAt": "2026-10-19T12:05:48.506Z",
+        "status": "delivered",
+        "attachmentType": "text"
+      }
+    ]
+  },
+  "conversations": [
+    {
+      "id": "group_1792411481862_ff3a",
+      "participants": [
+        "user_1792411398796_4ev4"
+      ],
+      "updatedAt": "2026-10-19T12:05:48.506Z"
+    }
+  ],
+  "savedAt": "2026-10-19T12:06:07.167Z"
+}

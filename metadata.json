@@ -1,0 +1,11 @@
+{
+  "name": "Pulse",
+  "description": "Быстрый и защищенный мессенджер с чатами в реальном времени и аудио/видеозвонками.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

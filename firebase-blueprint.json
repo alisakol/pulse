@@ -1,0 +1,254 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile containing unique username, display name, email, avatar, and status",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Firebase Authentication UID of the user"
+        },
+        "username": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 32,
+          "description": "Unique lowercase nickname handle without @ prefix"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60,
+          "description": "User display name shown in chats"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address used for authentication and password recovery"
+        },
+        "role": {
+          "type": "string",
+          "maxLength": 160,
+          "description": "User status or bio description"
+        },
+        "avatarColor": {
+          "type": "string",
+          "description": "Hex color code for fallback avatar"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "description": "Profile photo URL"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Account registration timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Profile update timestamp"
+        }
+      },
+      "required": ["id", "username", "displayName", "email"]
+    },
+    "UsernameIndex": {
+      "title": "UsernameIndex",
+      "description": "Unique index mapping username handle to user UID and email for nickname-based sign-in",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "User UID associated with this username"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email associated with this username"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Index creation timestamp"
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "ChatRoom": {
+      "title": "ChatRoom",
+      "description": "Group chat or broadcast channel",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique room ID"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["group", "channel"],
+          "description": "Room type: group chat or channel"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 64,
+          "description": "Room title"
+        },
+        "handle": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 32,
+          "description": "Room handle without @"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Room description"
+        },
+        "avatarColor": {
+          "type": "string",
+          "description": "Fallback avatar color"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "description": "Room avatar image URL"
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "Creator user UID"
+        },
+        "adminIds": {
+          "type": "array",
+          "description": "List of admin user UIDs"
+        },
+        "memberIds": {
+          "type": "array",
+          "description": "List of participant user UIDs"
+        },
+        "isPublic": {
+          "type": "boolean",
+          "description": "Whether the room is discoverable or invite-only"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Room creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Room update timestamp"
+        }
+      },
+      "required": ["id", "type", "title", "ownerId", "adminIds", "memberIds"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Message in a direct chat, group, or channel",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique message ID"
+        },
+        "conversationId": {
+          "type": "string",
+          "description": "Conversation ID or Room ID"
+        },
+        "senderId": {
+          "type": "string",
+          "description": "Sender user UID"
+        },
+        "senderName": {
+          "type": "string",
+          "description": "Sender display name at the moment of sending"
+        },
+        "senderAvatarColor": {
+          "type": "string",
+          "description": "Sender avatar color"
+        },
+        "senderAvatarUrl": {
+          "type": "string",
+          "description": "Sender avatar image URL"
+        },
+        "recipientId": {
+          "type": "string",
+          "description": "Recipient user UID or Room ID"
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 8000,
+          "description": "Message text content"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Message creation timestamp"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["sent", "delivered", "read"],
+          "description": "Message delivery and read receipt status"
+        },
+        "attachmentType": {
+          "type": "string",
+          "enum": ["text", "voice", "video_note"],
+          "description": "Message attachment type"
+        },
+        "mediaUrl": {
+          "type": "string",
+          "description": "Media data or download URL"
+        },
+        "mediaDuration": {
+          "type": "number",
+          "description": "Audio or video duration in seconds"
+        },
+        "waveform": {
+          "type": "array",
+          "description": "Audio waveform amplitude bars"
+        },
+        "viewsCount": {
+          "type": "number",
+          "description": "Post views count for channels"
+        }
+      },
+      "required": ["id", "conversationId", "senderId", "recipientId", "createdAt", "status", "attachmentType"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Conversation summary tracking participants and last activity",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Conversation ID"
+        },
+        "participants": {
+          "type": "array",
+          "description": "Array of participant user IDs"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last message timestamp"
+        }
+      },
+      "required": ["id", "participants", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles indexed by Firebase Auth UID"
+    },
+    "/usernames/{username}": {
+      "schema": { "$ref": "#/entities/UsernameIndex" },
+      "description": "Unique username-to-email index for nickname login"
+    },
+    "/rooms/{roomId}": {
+      "schema": { "$ref": "#/entities/ChatRoom" },
+      "description": "Group chats and broadcast channels"
+    },
+    "/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Chat messages, voice notes, and video circles"
+    },
+    "/conversations/{convId}": {
+      "schema": { "$ref": "#/entities/Conversation" },
+      "description": "Conversation summaries"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Health check collection for connection testing
+    match /test/{testId} {
+      allow read: if true;
+    }
+
+    // Profiles collection
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if false;
+    }
+
+    // Unique username index for nickname login
+    match /usernames/{username} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // Rooms (Group chats & Channels)
+    match /rooms/{roomId} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if isSignedIn();
+    }
+
+    // Messages (Text, Voice, Video Circles)
+    match /messages/{messageId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isSignedIn();
+    }
+
+    // Conversations overview
+    match /conversations/{convId} {
+      allow read, write: if isSignedIn();
+    }
+  }
+}

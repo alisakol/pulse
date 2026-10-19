@@ -1,0 +1,10 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+.messenger-store.json
+.pulse-data.json
